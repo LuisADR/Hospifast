@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h3> {{ datos.name }} </h3>
+      <h5> ID: {{ datos.id }} </h5>
+    </div>
+    <div class="col text-right">
+      <h5>Telefono: {{ datos.phones | search }} </h5>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-5">
+  <h4> Datos Personales</h4>
+  <hr>
+  <p><b>Nombre:</b> {{ datos.name }} </p>
+  <p><b>Fecha Nacimiento:</b> {{ datos.birthday }} </p>
+  <p><b>Numeros Telefonicos:</b></p>
+
+  <ul class="list-group list-group-horizontal">
+    <li class="list-group-item" *ngFor="let item of datos.phones">
+      <b> {{ item.type }}: </b> {{ item.phone }}
+    </li>
+  </ul>
+</div>

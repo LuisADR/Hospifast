@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col">
+    <h4>Salas</h4>
+  </div>
+  <div class="col text-right">
+    <button class="btn btn-outline-primary mr-2"
+            (click)="this.registrarSala = !this.registrarSala"
+            *ngIf="!registrarSala && !editar">Agregar</button>
+    <button type="button" class="btn btn-outline-danger mb-2"
+            (click)="reset()"
+            *ngIf="registrarSala || editar">Cancelar</button>
+  </div>
+</div>
+<hr>
+
+<div class="container-fluid" *ngIf="registrarSala || editar">
+
+  <div class="alert alert-warning animated fadeIn" *ngIf="alertaCrear" role="alert" >
+    Faltan Algunos elementos por llenar ....
+  </div>
+
+  <form class="historial" [formGroup]="formaSala" (ngSubmit)="submite()">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label>Id</label>
+        <input disabled type="text" class="form-control" placeholder="Id" formControlName='id'>
+      </div>
+      <div class="form-group col-md-3">
+        <label>Ubicacion</label>
+        <input type="text" class="form-control" placeholder="Ubicacion" formControlName="ubicacion" [class.is-invalid]="ubicacionValido">
+      </div>
+      <div class="form-group col-md-3">
+        <label>Especialidad</label>
+        <input type="text" class="form-control" placeholder="Especialidad" formControlName="especialidad" [class.is-invalid]="especialidadValido">
+      </div>
+      <div class="form-group col-md-3" *ngIf="editar">
+        <label>Estado</label>
+        <input type="text" class="form-control" placeholder="Especialidad" formControlName="estado" [class.is-invalid]="estadoValido">
+      </div>
+    </div>
+
+    <div class="form-inline">
+      <button *ngIf="registrarSala" type="submit" class="btn btn-primary mb-2 mr-2">Crear Cuenta</button>
+      <button *ngIf="editar" type="submit" class="btn btn-primary mb-2 mr-2">Editar</button>
+    </div>
+  </form>
+</div>
+
+  <app-cards [datos]="cards" (id)="editInfo($event)"></app-cards>
+<br><br>

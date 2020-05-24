@@ -1,0 +1,104 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h3> {{ datos.pacienteNombre }} </h3>
+      <h5> ID: {{ datos.id }} </h5>
+    </div>
+    <div class="col text-right">
+      <h5>Estado: {{ datos.pacienteEstado  }} </h5>
+      <button *ngIf="this.user.type === 'doctor' && datos.edit" class="btn btn-outline-danger" (click)="archivar()">Archivar</button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-5">
+  <div class="row">
+
+
+    <div class="col">
+      <h4> Datos Paciente</h4>
+      <hr>
+      <p><b>Nombre:</b> {{ datos.pacienteNombre }} </p>
+      <p><b>ID:</b> {{ datos.pacienteId }} </p>
+      <p><b>Sexo:</b> {{ datos.pacienteSexo}} </p>
+      <p><b>Estado:</b> {{ datos.pacienteEstado }} </p>
+
+
+      <br><br>
+
+
+      <h4> Datos Doctor </h4>
+      <hr>
+      <p><b>Nombre:</b> {{ datos.doctorNombre }} </p>
+      <p><b>ID:</b> {{ datos.doctorId }} </p>
+      <p><b>Especialidades:</b> {{ datos.doctorEspecialidad | concatenar}} </p>
+
+    </div>
+
+
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <h4> Sintomas </h4>
+        </div>
+        <div class="col text-right" *ngIf="this.user.type === 'doctor' && datos.edit === true">
+          <button *ngIf="!editarSinstomas" class="btn btn-outline-primary" (click)="editarSinstomas = !editarSinstomas">Editar</button>
+          <button *ngIf="editarSinstomas"  class="btn btn-outline-danger" (click)="editarSinstomas = !editarSinstomas">Cancelar</button>
+        </div>
+      </div>
+      <hr>
+      <span *ngIf="!editarSinstomas">{{datos.sintomas}}</span>
+
+      <form *ngIf="editarSinstomas" [formGroup] = 'formSintomas' (ngSubmit)="updateSintomas()">
+        <label>Formulario Sintomas</label>
+        <textarea class="form-control" rows="3" formControlName="sintomas"></textarea>
+        <br>
+        <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
+      </form>
+
+      <br><br>
+
+      <div class="row">
+        <div class="col">
+          <h4> Diagnostico </h4>
+        </div>
+        <div class="col text-right" *ngIf="this.user.type === 'doctor' && datos.edit === true">
+          <button *ngIf="!editarDiagnostico" class="btn btn-outline-primary" (click)="editarDiagnostico = !editarDiagnostico">Editar</button>
+          <button *ngIf="editarDiagnostico"  class="btn btn-outline-danger" (click)="editarDiagnostico = !editarDiagnostico">Cancelar</button>
+        </div>
+      </div>
+      <hr>
+      <span *ngIf="!editarDiagnostico">{{datos.diagnostico}}</span>
+
+      <form *ngIf="editarDiagnostico" [formGroup] = 'formDiagnostico' (ngSubmit)="updateDiagnostico()">
+        <label>Formulario Diagnostico</label>
+        <textarea class="form-control" rows="3" formControlName="diagnostico"></textarea>
+        <br>
+        <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
+      </form>
+
+      <br><br>
+
+      <div class="row">
+        <div class="col">
+          <h4> Tratamiento </h4>
+        </div>
+        <div class="col text-right" *ngIf="this.user.type === 'doctor' && datos.edit === true">
+          <button *ngIf="!editarTratamiento" class="btn btn-outline-primary" (click)="editarTratamiento = !editarTratamiento">Editar</button>
+          <button *ngIf="editarTratamiento"  class="btn btn-outline-danger" (click)="editarTratamiento = !editarTratamiento">Cancelar</button>
+        </div>
+      </div>
+      <hr>
+      <span *ngIf="!editarTratamiento">{{datos.tratamiento}}</span>
+
+      <form *ngIf="editarTratamiento" [formGroup] = 'formTratamiento' (ngSubmit)="updateTratamiento()">
+        <label>Formulario Tratamiento</label>
+        <textarea class="form-control" rows="3" formControlName="tratamiento"></textarea>
+        <br>
+        <button type="submit" class="btn btn-primary mb-2">Actualizar</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="col">
+    <h4>Citas</h4>
+  </div>
+  <div class="col text-right">
+    <button class="btn btn-outline-primary mr-2"
+            (click)="this.agregarCita = !this.agregarCita"
+            *ngIf="!agregarCita && !agregarEvento">Agregar Cita</button>
+    <button class="btn btn-outline-primary"
+            (click)="this.agregarEvento = !this.agregarEvento"
+            *ngIf="!agregarEvento && !agregarCita">Agregar Evento</button>
+    <button type="button" class="btn btn-outline-danger mb-2"
+            (click)="reset()"
+            *ngIf="agregarCita || agregarEvento">Cancelar</button>
+  </div>
+</div>
+<hr>
+<div class="alert alert-warning animated fadeIn" role="alert" *ngIf="citaInvalida">
+  Algun campo no es correcto
+</div>
+<div class="alert alert-warning animated fadeIn" role="alert" *ngIf="horarioInvalid">
+  Horario Ocupado
+</div>
+<div class="alert alert-warning animated fadeIn" role="alert" *ngIf="usuarioInvalido">
+  No se encontro al usuario registrado
+</div>
+
+<form *ngIf="agregarCita" [formGroup]="formCita" (ngSubmit)="agendarCita()">
+
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Id / Email Paciente" formControlName="idEmail" [class.is-invalid]="idValido">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Duracion hora:minuto" formControlName="duracion" [class.is-invalid]="duracionValido2">
+    </div>
+  </div>
+
+  <label>Dia</label>
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Dia" formControlName="dia" [class.is-invalid]="diaValido2">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Mes" formControlName="mes" [class.is-invalid]="mesValido2">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Año" formControlName="ano" [class.is-invalid]="anoValido2">
+    </div>
+  </div>
+
+  <label>Horario</label>
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="hora" formControlName="hora" [class.is-invalid]="horaValido2">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="minuto" formControlName="minutos" [class.is-invalid]="minutoValido2">
+    </div>
+  </div>
+
+  <div class="form-inline">
+    <button type="submit" class="btn btn-primary mb-2 mr-2">Agendar</button>
+  </div>
+</form>
+
+<form *ngIf="agregarEvento || editarEvento" [formGroup]="formEvento" (ngSubmit)="agendar()">
+
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Titulo" formControlName="titulo" [class.is-invalid]="tituloValido">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Descripcion" formControlName="descripcion" [class.is-invalid]="descValido">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Duracion hora:minuto" formControlName="duracion" [class.is-invalid]="duracionValido">
+    </div>
+  </div>
+
+  <label>Dia</label>
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Dia" formControlName="dia" [class.is-invalid]="diaValido">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Mes" formControlName="mes" [class.is-invalid]="mesValido">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Año" formControlName="ano" [class.is-invalid]="anoValido">
+    </div>
+  </div>
+
+  <label>Horario</label>
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="hora" formControlName="hora" [class.is-invalid]="horaValido">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="minuto" formControlName="minutos" [class.is-invalid]="minutoValido">
+    </div>
+  </div>
+
+  <div class="form-inline">
+    <button type="submit" class="btn btn-primary mb-2 mr-2">Agendar</button>
+    <button type="button" class="btn btn-primary mb-2 mr-2" (click)="actualizar()">Editar</button>
+  </div>
+</form>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Asunto:</th>
+    <th scope="col">Empieza: </th>
+    <th scope="col">Termina: </th>
+    <th scope="col">Descripcion: </th>
+    <th scope="col">Accion: </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let agenda of doctor.citas; let i = index">
+    <th scope="row">{{agenda.titulo}}</th>
+    <td>{{agenda.date | date:'short'}}</td>
+    <td>{{agenda.duracion | date:'short'}}</td>
+    <td>{{agenda.descripcion}}</td>
+    <td>
+      <button class="btn btn-outline-success mr-3" (click)="concluir(i)" >Concluir</button>
+<!--      <button class="btn btn-outline-warning" (click)="posicion(i)">Editar</button>-->
+    </td>
+  </tr>
+  </tbody>
+</table>
