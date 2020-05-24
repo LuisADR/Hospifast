@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Hospifast"
+    }
+  },
+  "defaultProject": "Hospifast",
+  "cli": {
+    "analytics": false
+  }
 }
