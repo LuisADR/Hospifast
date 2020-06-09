@@ -19,7 +19,7 @@ import {EnfermeroHomeComponent} from './profiles/Enfermero/enfermero-home/enferm
 import {ENFERMERO_ROUTES} from './profiles/Enfermero/enfermero.routes';
 
 const routes: Routes = [
-    {path: 'home', component: HomeComponent},
+    {path: 'inicio', component: HomeComponent},
     {
       path: 'administrador',
       component: AdministradorHomeComponent,
@@ -54,7 +54,7 @@ const routes: Routes = [
     component: EnfermeroHomeComponent,
     children: ENFERMERO_ROUTES
   },
-    {path: '**', pathMatch: 'full', redirectTo: 'home'}
+    {path: '**', pathMatch: 'full', redirectTo: 'inicio'}
 ];
 
 @NgModule({

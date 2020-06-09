@@ -7,6 +7,7 @@
     <div class="col text-right">
       <h5>Estado: {{ datos.pacienteEstado  }} </h5>
       <button *ngIf="this.user.type === 'doctor' && datos.edit" class="btn btn-outline-danger" (click)="archivar()">Archivar</button>
+      <button *ngIf="this.user.type === 'paciente' && datos.edit" [routerLink]="['inicio']" class="btn btn-outline-success">Regresar</button>
     </div>
   </div>
 </div>

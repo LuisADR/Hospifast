@@ -35,6 +35,8 @@ import { AdministradorEnfermeroComponent } from './profiles/Administrador/admini
 import { EnfermeroHomeComponent } from './profiles/Enfermero/enfermero-home/enfermero-home.component';
 import { EnfermeroInicioComponent } from './profiles/Enfermero/enfermero-inicio/enfermero-inicio.component';
 import { EnfermeroEquipoComponent } from './profiles/Enfermero/enfermero-equipo/enfermero-equipo.component';
+import {DoctorSalasComponent} from './profiles/Doctor/doctor-salas/doctor-salas.component';
+import { SecretariaPagoComponent } from './profiles/Secretaria/secretaria-pago/secretaria-pago.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { EnfermeroEquipoComponent } from './profiles/Enfermero/enfermero-equipo/
     AdministradorEnfermeroComponent,
     EnfermeroHomeComponent,
     EnfermeroInicioComponent,
-    EnfermeroEquipoComponent
+    EnfermeroEquipoComponent,
+    DoctorSalasComponent,
+    SecretariaPagoComponent
   ],
   imports: [
     BrowserModule,

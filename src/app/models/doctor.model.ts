@@ -1,5 +1,7 @@
 import { Phone } from './phone.model';
 import {Agenda} from './agenda.model';
+import {SalaModel} from './sala.model';
+
 export class Doctor {
     id: string;
     email: string;
@@ -9,6 +11,7 @@ export class Doctor {
     specialties: string[];
     casesID: string[];
     saveCasesID: string[];
+    shareCasesID: string[];
     phones: Phone[];
     citas: Agenda[];
     constructor(name: string, specialitie: string[], birthday: string, phones: Phone[], id: string, mail: string) {
@@ -22,5 +25,6 @@ export class Doctor {
         this.casesID = [];
         this.saveCasesID = [];
         this.citas = [];
+        this.shareCasesID = [];
     }
 }

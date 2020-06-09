@@ -125,7 +125,7 @@
     <td>{{data.presentacion}}</td>
     <td>{{data.disponibilidad}}</td>
     <td>
-      <button class="btn btn-outline-success mr-3" *ngIf="!editarMedicamento" (click)="compra(i)">Agregar</button>
+      <button class="btn btn-outline-success mr-3" *ngIf="!editarMedicamento && historialUsuario != null" (click)="compra(i)">Agregar</button>
       <button class="btn btn-outline-danger mr-3" *ngIf="editarMedicamento" (click)="eliminar(i)">Eliminar</button>
       <button class="btn btn-outline-warning" *ngIf="editarMedicamento" (click)="update(i)">Actualizar</button>
     </td>
@@ -164,6 +164,12 @@
     </thead>
     <tbody>
     <tr *ngFor="let data of historialUsuario.medicamentosSurtidos; let i = index">
+      <th scope="row">{{data.id}}</th>
+      <td>{{data.nombre}}</td>
+      <td>{{data.precio}}</td>
+      <td>{{data.envase}}</td>
+    </tr>
+    <tr *ngFor="let data of historialUsuario.medicamentosSurtidosP; let i = index">
       <th scope="row">{{data.id}}</th>
       <td>{{data.nombre}}</td>
       <td>{{data.precio}}</td>

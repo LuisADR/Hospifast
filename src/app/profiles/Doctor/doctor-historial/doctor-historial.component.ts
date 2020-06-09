@@ -26,6 +26,7 @@ export class DoctorHistorialComponent implements OnInit {
 
   cards: CardInfo[] = [];
   cardsArchivado: CardInfo[] = [];
+  cardsCompartido: CardInfo[] = [];
 
   constructor( private formBuilder: FormBuilder,
                private data: DataService,
@@ -47,6 +48,17 @@ export class DoctorHistorialComponent implements OnInit {
     user.user.saveCasesID.forEach( (caso) => {
       const historial = this.data.getHistorialArchivados(caso);
       this.cardsArchivado.push( new CardInfo(
+        historial.pacienteNombre,
+        historial.id,
+        `Estado: ${historial.pacienteEstado}`,
+        `Archivado`,
+        `Consulta`
+      ));
+    });
+
+    user.user.shareCasesID.forEach( (caso) => {
+      const historial = this.data.getHistorialArchivados(caso);
+      this.cardsCompartido.push( new CardInfo(
         historial.pacienteNombre,
         historial.id,
         `Estado: ${historial.pacienteEstado}`,

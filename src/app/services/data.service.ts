@@ -50,6 +50,8 @@ export class DataService {
     // Doctores
     this.createDoctor('Victor Eduardo', ['Medico General'], '30/01/1986',
                       [ new Phone('Casa', '4512384'), new Phone('Celular', '7221452236')], 'victoreduardo@gmail.com');
+    this.createDoctor('Enrique Jesus', ['Medico General', 'Traumatologo'], '15/06/1989',
+      [ new Phone('Casa', '1235462'), new Phone('Celular', '552469250')], 'enrique@gmail.com');
 
     // Secretarios
     this.createSecretario( 'Veronica', '16/06/1989', 'veronica@gmail.com', [new Phone('Casa', '2147562')], ['D_0'], 'veronica');
@@ -57,6 +59,12 @@ export class DataService {
     // Historial
     this.createHistorial( 'D_0', 'P_0');
     this.casosActivos[0].tratamiento = '1 pastillas de Ibuprufeno 500g cada 12hrs por 3 dias';
+    this.casosArchivados.push(new Historial('H_1', this.getUser('D_0'), this.getUser('P_1'), 'Regular'));
+    this.casosArchivados[0].edit = false;
+    this.pacientes[1].historialID.push('H_1');
+    this.lastIdHistorial ++;
+    this.getUser('D_0').saveCasesID.push('H_1');
+
 
     // Enfermero
     this.createEnfermero('Victor Eduardo Sanchez', '24/04/2000', 'vicEduardo@gmail.com', [new Phone('Celular', '7221452236')], '1234');
@@ -74,8 +82,17 @@ export class DataService {
     this.farmacia[0].medicamento[0].disponibilidad = 15;
     this.farmacia[0].medicamento[0].precio = 150;
 
+    this.casosArchivados[0].medicamentosSurtidos.push(this.farmacia[0].medicamento[0]);
+    this.casosArchivados[0].medicamentosSurtidos[0].disponibilidad = 1;
+
     // Salas
     this.crearSala( 'S_0', 'Edificio 1', 'Consultorio');
+    this.crearSala( 'S_1', 'Edificio 1', 'Quirofano');
+    this.crearSala( 'S_2', 'Edificio 2', 'Radiografia');
+    this.salas[2].disponible = false;
+    this.salas[2].reservado = true;
+    this.salas[2].estado = 'Reservado';
+    this.salas[2].doctorId = 'D_1';
 
     // Equipo Medico
     this.createEquipo('Silla de ruedes', 'Sala de espera');
@@ -303,6 +320,10 @@ export class DataService {
     return this.salas.find((datos) => datos.id === id);
   }
 
+  getSalaTipo( tipo: string ){
+    return this.salas.find((datos) => datos.especialidad === tipo);
+  }
+
   // Obtener Historial
   archivarHistorial( historia: Historial){
 
@@ -336,16 +357,21 @@ export class DataService {
 
   // Ver si una sala es disponible
 
-  isAvaliable( id: string){
-    return this.salas.find((datos) => {
+  changeSalaReservada( id: string, idDoctor: string ){
+    const sala = this.salas.find((datos) => datos.id === id);
 
-      if ( datos.id === id){
-        if (datos.estado === 'Disponible'){
-          return true;
-        } else {
-          return false;
-        }
-      }
-    });
+    sala.estado = 'Reservado';
+    sala.disponible = false;
+    sala.doctorId = idDoctor;
+    console.log(sala);
+  }
+
+  changeSalaDisponible( id: string ){
+    const sala = this.salas.find((datos) => datos.id === id);
+
+    sala.estado = 'Disponible';
+    sala.disponible = true;
+    sala.doctorId = '';
+    console.log(sala);
   }
 }

@@ -12,7 +12,7 @@ export class DoctorHomeComponent implements OnInit {
 
   constructor() {
     this.navbarRoutes = [new Navbar('Inicio', 'inicio'), new Navbar('Historial', 'historial'),
-                         new Navbar('Agenda', 'agenda')];
+                         new Navbar('Agenda', 'agenda'), new Navbar('Salas', 'salas')];
   }
 
   ngOnInit(): void {

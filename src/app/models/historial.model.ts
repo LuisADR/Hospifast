@@ -10,6 +10,7 @@ export class Historial {
   doctorNombre: string;
   doctorEspecialidad: string[];
   medicamentosSurtidos: MedicamentoModel[];
+  medicamentosSurtidosP: MedicamentoModel[];
 
   pacienteNombre: string;
   pacienteId: string;
@@ -19,6 +20,9 @@ export class Historial {
   sintomas: string;
   diagnostico: string;
   tratamiento: string;
+
+  pago: boolean;
+  pagoConsulta: boolean;
 
   constructor( id: string, doctor: Doctor, paciente: Paciente, estado: string){
     this.id = id;
@@ -31,5 +35,8 @@ export class Historial {
     this.pacienteSexo = paciente.sex;
     this.pacienteEstado = estado;
     this.medicamentosSurtidos = [];
+    this.medicamentosSurtidosP = [];
+    this.pago = false;
+    this.pagoConsulta = false;
   }
 }

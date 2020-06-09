@@ -1,12 +1,14 @@
 <div class="container-fluid ">
     <div class="card-columns ">
-        <div class="card mb-3" style="max-width: 440px;" *ngFor="let item of datos; let i = index" (click)="getId(i)">
+        <div class="card mb-3" [ngClass]="{'border-success' : item.succes, 'border-warning': item.warning, 'border-primary': item.primary }" style="max-width: 440px;" *ngFor="let item of datos; let i = index" (click)="getId(i)">
             <div class="row no-gutters">
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{ item.header }}</h5>
+                        <h5 class="card-title" [ngClass]="{'text-success' : item.succes, 'text-warning': item.warning, 'text-primary': item.primary }"> {{ item.header }}</h5>
                         <p class="card-text">ID: {{ item.id }} <br> {{ item.uno }} <br> {{ item.dos }}</p>
                         <p class="card-text"><small class="text-muted">{{ item.small }}</small></p>
+                        <button class="btn btn-success" *ngIf="item.button && item.succes" (click)="reservar(item.id)">Reservar</button>
+                        <button class="btn btn-primary" *ngIf="item.button && item.primary" (click)="liberar(item.id)">Liberar</button>
                     </div>
                 </div>
             </div>

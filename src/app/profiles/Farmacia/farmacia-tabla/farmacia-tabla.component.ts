@@ -125,6 +125,7 @@ export class FarmaciaTablaComponent{
 
     if (med.disponibilidad-- >= 1){
       this.cesta.push(med);
+      console.log(med);
     } else {
       this.agotado = !this.agotado;
       setTimeout(() => {
@@ -137,6 +138,7 @@ export class FarmaciaTablaComponent{
   terminarCompra(){
     this.cesta.forEach( datos => {
       this.historialUsuario.medicamentosSurtidos.push(datos);
+      this.historialUsuario.pago = false;
     });
 
     this.cesta = [];

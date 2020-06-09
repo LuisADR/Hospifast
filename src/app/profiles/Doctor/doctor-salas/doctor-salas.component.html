@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col">
+    <div class="row">
+      <h4>Salas Hospital</h4>
+      <form class="form-inline ml-4 my-lg-0" [formGroup]="formBusqueda" (ngSubmit)="buscarSala()">
+        <input (keyup)="buscarSala()" class="form-control mr-sm-2" type="text" placeholder="Especialidad" formControlName="id">
+        <button class="btn btn-outline-success my-sm-0" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+
+<app-cards [datos]="tarjetas"></app-cards> 

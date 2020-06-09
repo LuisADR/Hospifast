@@ -16,7 +16,9 @@
 
 
     <div class="col">
-      <h4> Datos Personales</h4>
+      <div class="row ml-1">
+        <h4> Datos Personales</h4>
+      </div>
       <hr>
       <p><b>Nombre:</b> {{ datos.name }} </p>
       <p><b>Fecha Nacimiento:</b> {{ datos.birthday }} </p>
@@ -42,15 +44,29 @@
 
 
     <div class="col">
-      <h4> Historial Medico </h4>
+      <div class="row ml-1">
+        <h4> Historial Medico </h4>
+        <button *ngIf="compartir" class="btn btn-outline-danger ml-2" (click)="reset()">Cancelar</button>
+      </div>
       <hr>
+      <div class="alert alert-success animated fadeIn" role="alert" *ngIf="compartido">
+        Historial Compartido!
+      </div>
+      <div class="alert alert-warning animated fadeIn" role="alert" *ngIf="nullDoctor">
+        Doctor no encontrado
+      </div>
       <p *ngIf="datos.historialID.length === 0">Aun no se ha archivado un historial Medico</p>
       <div class="row" *ngFor="let item of datos.historialID">
         <div class="col">
           <p>{{item}}</p>
         </div>
-        <div class="col text-right">
-          <button class="btn btn-outline-primary" (click)="verCaso(item)">Ver</button>
+        <div class="col-md-auto text-right">
+          <form *ngIf="compartir"class="form-inline ml-4 my-lg-0" [formGroup]="formBusquedaD" (ngSubmit)="agregarDoctor(item)">
+            <input class="form-control mr-sm-2" type="text" placeholder="Doctor ID" formControlName="id">
+            <button class="btn btn-outline-success my-sm-0" type="submit">Compartir</button>
+          </form>
+          <button *ngIf="!compartir" class="btn btn-outline-primary mr-2" (click)="compartir = !compartir">Compartir</button>
+          <button *ngIf="!compartir" class="btn btn-outline-primary" (click)="verCaso(item)">Ver</button>
         </div>
       </div>
 
