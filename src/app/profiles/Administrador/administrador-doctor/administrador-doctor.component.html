@@ -28,8 +28,13 @@
       <div class="form-group col-md-3">
         <input type="text" class="form-control" placeholder="Fecha Nacimiento" formControlName="cumpleanos" [class.is-invalid]="cumpleanosValid">
       </div>
-      <div class="form-group col-md-3">
-        <input type="text" class="form-control" placeholder="Sexo" formControlName="sexo" [class.is-invalid]="sexoValid">
+      <div class="form-group col-md-3 row">
+        <label class="col-sm-2 col-form-label">Sexo </label>
+        <select class="form-control col" formControlName="sexo" required>
+          <option *ngFor="let state of sexo" [ngValue]="state">
+            {{ state }}
+          </option>
+        </select>
       </div>
     </div>
 

@@ -11,4 +11,47 @@
 </div>
 <hr>
 
-<app-cards [datos]="tarjetas"></app-cards> 
+<div class="alert alert-warning animated fadeIn" role="alert" *ngIf="formInvalid">
+  Algun campo no es correcto
+</div>
+
+<form *ngIf="agendarSala" [formGroup]="formAgenda" (ngSubmit)="agendarHorario()">
+
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Motivo de la reserva" formControlName="idEmail" [class.is-invalid]="idValido">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Duracion hora:minuto" formControlName="duracion" [class.is-invalid]="duracionValido2">
+    </div>
+  </div>
+
+  <label>Dia</label>
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Dia" formControlName="dia" [class.is-invalid]="diaValido2">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Mes" formControlName="mes" [class.is-invalid]="mesValido2">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="Año" formControlName="ano" [class.is-invalid]="anoValido2">
+    </div>
+  </div>
+
+  <label>Horario</label>
+  <div class="form-row">
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="hora" formControlName="hora" [class.is-invalid]="horaValido2">
+    </div>
+    <div class="form-group col-sm">
+      <input type="text" class="form-control" placeholder="minuto" formControlName="minutos" [class.is-invalid]="minutoValido2">
+    </div>
+  </div>
+
+  <div class="form-inline">
+    <button type="submit" class="btn btn-primary mb-2 mr-2">Agendar</button>
+  </div>
+</form>
+
+<app-cards [datos]="tarjetas" (agendar)="agendarSala = $event" (id)="id = $event"></app-cards> 

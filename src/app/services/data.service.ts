@@ -93,6 +93,8 @@ export class DataService {
     this.salas[2].reservado = true;
     this.salas[2].estado = 'Reservado';
     this.salas[2].doctorId = 'D_1';
+    this.salas[2].horarioInicio = new Date(2020, 6, 24, 10, 30, 0, 0);
+    this.salas[2].horarioFin = new Date(2020, 6, 24, 13, 30, 0, 0);
 
     // Equipo Medico
     this.createEquipo('Silla de ruedes', 'Sala de espera');
@@ -357,11 +359,13 @@ export class DataService {
 
   // Ver si una sala es disponible
 
-  changeSalaReservada( id: string, idDoctor: string ){
+  changeSalaReservada( id: string, idDoctor: string, hora1: Date, hora2: Date){
     const sala = this.salas.find((datos) => datos.id === id);
 
     sala.estado = 'Reservado';
     sala.disponible = false;
+    sala.horarioFin = hora2;
+    sala.horarioInicio = hora1;
     sala.doctorId = idDoctor;
     console.log(sala);
   }

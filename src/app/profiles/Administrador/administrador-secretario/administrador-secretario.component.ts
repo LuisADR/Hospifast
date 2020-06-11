@@ -150,7 +150,7 @@ export class AdministradorSecretarioComponent implements OnInit {
       casa: ['', Validators.required],
       personal: [''],
       trabajo: [''],
-      correo: ['', Validators.required],
+      correo: ['', Validators.required, Validators.email],
       contrasena: ['', Validators.required]
     });
   }

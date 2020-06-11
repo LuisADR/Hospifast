@@ -7,6 +7,9 @@ export class SalaModel {
   reservado: boolean;
   doctorId: string;
 
+  horarioInicio: Date;
+  horarioFin: Date;
+
   constructor(id: string, ubicacion: string, especialidad: string) {
 
     this.id = id;

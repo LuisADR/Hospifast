@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {Phone} from '../../models/phone.model';
 import {DataService} from '../../services/data.service';
+import {DateValidator} from '../../services/DateValidator';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,8 @@ export class HomeComponent implements OnInit {
   formaPaciente: FormGroup;
   forma: FormGroup;
   alert = false;
+
+  sexo: string [];
 
   registrar = false;
   alertaCrear = false;
@@ -26,6 +29,7 @@ export class HomeComponent implements OnInit {
                private router: Router,
                private data: DataService) {
     this.crearFormulario();
+    this.sexo = [ 'Hombre', 'Mujer'];
   }
 
   ngOnInit(): void {
@@ -47,12 +51,12 @@ export class HomeComponent implements OnInit {
 
     this.formaPaciente = this.formBuilder.group({
       nombre : ['', Validators.required],
-      cumpleanos : ['', Validators.required],
-      sexo : ['', Validators.required],
+      cumpleanos : new FormControl('', Validators.required),
+      sexo : new FormControl( '', Validators.required),
       casa : ['', Validators.required],
       personal : [''],
       trabajo : [''],
-      correo : ['', Validators.required],
+      correo : ['', Validators.required, Validators.email],
       contrasena : ['', Validators.required]
     });
   }

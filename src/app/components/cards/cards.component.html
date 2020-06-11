@@ -7,7 +7,7 @@
                         <h5 class="card-title" [ngClass]="{'text-success' : item.succes, 'text-warning': item.warning, 'text-primary': item.primary }"> {{ item.header }}</h5>
                         <p class="card-text">ID: {{ item.id }} <br> {{ item.uno }} <br> {{ item.dos }}</p>
                         <p class="card-text"><small class="text-muted">{{ item.small }}</small></p>
-                        <button class="btn btn-success" *ngIf="item.button && item.succes" (click)="reservar(item.id)">Reservar</button>
+                        <button class="btn btn-success" *ngIf="item.button && item.succes" (click)="agendarSala()">Reservar</button>
                         <button class="btn btn-primary" *ngIf="item.button && item.primary" (click)="liberar(item.id)">Liberar</button>
                     </div>
                 </div>

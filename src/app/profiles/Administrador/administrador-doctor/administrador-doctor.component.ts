@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DataService} from '../../../services/data.service';
 import {Router} from '@angular/router';
 import {CardInfo} from '../../../models/cardInfo.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Phone} from '../../../models/phone.model';
 
 @Component({
@@ -13,6 +13,7 @@ import {Phone} from '../../../models/phone.model';
 export class AdministradorDoctorComponent implements OnInit {
 
   cards: CardInfo[] = [];
+  sexo: string [];
 
   formaDoctor: FormGroup;
 
@@ -23,6 +24,8 @@ export class AdministradorDoctorComponent implements OnInit {
   constructor( public data: DataService,
                private router: Router,
                private formBuilder: FormBuilder) {
+
+    this.sexo = [ 'Hombre', 'Mujer'];
 
     this.data.doctores.forEach( (doctor) => {
 
@@ -139,11 +142,11 @@ export class AdministradorDoctorComponent implements OnInit {
     this.formaDoctor = this.formBuilder.group({
       nombre: ['', Validators.required],
       cumpleanos: ['', Validators.required],
-      sexo: ['', Validators.required],
+      sexo: new FormControl(),
       casa: ['', Validators.required],
       personal: [''],
       trabajo: [''],
-      correo: ['', Validators.required],
+      correo: ['', Validators.required, Validators.email],
       contrasena: ['', Validators.required],
       especialidad1: ['', Validators.required],
       especialidad2: [''],
